@@ -52,7 +52,7 @@ app.get('/api/data',(req,res)=>{
      {id:'4',name:'sum',value:'4',score:'1',country:'India',images:"https://tse4.mm.bing.net/th?id=OIP.p1LJSrhzpdQyahNT_zCSuQHaE7&pid=Api&P=0&h=180"}]})
 })
 
-app.get('/api/data',(req,res)=>{
+app.get('/api/goutham',(req,res)=>{
     res.json({"name":"goutham","password":"goutham@123"})})
 
 app.put('/api/puts',(req,res)=>{
