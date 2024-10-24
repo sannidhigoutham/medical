@@ -28,7 +28,7 @@ app.post('/data',(req,res)=>{
     // console.log("result",datavalue.datavalue())
 
     var user= req.body.value
-    console.log("00000000000000000",req.body,req.body.value)
+    console.log("00000000000000000",req.body.values,req.body.value,user)
     var list=[]
     if(user=="All"){
         list.push(data.users);
