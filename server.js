@@ -23,7 +23,7 @@ app.post('/dataperson',(req,res)=>{
    res.json(datavalue.datavalue())
 
 })
-app.post('/data',(req,res)=>{
+app.PUT('/data',(req,res)=>{
     //  const datavalue=require('./data')
     // console.log("result",datavalue.datavalue())
 
