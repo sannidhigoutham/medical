@@ -42,7 +42,7 @@ app.put('/data',(req,res)=>{
         }
     }
 }
-
+ list.push(data.users);
     res.json(list)
 })
 
