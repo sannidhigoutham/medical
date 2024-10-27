@@ -75,4 +75,32 @@ app.get('/api/images',(req,res)=>{
     res.json({"images":[{images:"https://tse4.mm.bing.net/th?id=OIP.p1LJSrhzpdQyahNT_zCSuQHaE7&pid=Api&P=0&h=180"},{images:"https://tse4.mm.bing.net/th?id=OIP.p1LJSrhzpdQyahNT_zCSuQHaE7&pid=Api&P=0&h=180"},{images:"https://tse4.mm.bing.net/th?id=OIP.p1LJSrhzpdQyahNT_zCSuQHaE7&pid=Api&P=0&h=180"},{images:"https://tse4.mm.bing.net/th?id=OIP.p1LJSrhzpdQyahNT_zCSuQHaE7&pid=Api&P=0&h=180"},{images:"https://tse4.mm.bing.net/th?id=OIP.p1LJSrhzpdQyahNT_zCSuQHaE7&pid=Api&P=0&h=180"}]})
 })
 
+app.post("/api/signin",(req,res)=>{
+    var user=req.body.name
+    var password=req.body.password
+    if(user=="goutham"&& password=="goutham@123"){
+        res.json({"id":"1234567890","login":"successful","type":"pharmacy"})
+
+    }if(user=="david"&& password=="david@123"){
+        res.json({"id":"1234567890","login":"successful","type":"docter"})
+
+    }if(user=="starlyn"&& password=="staryln@123"){
+        res.json({"id":"1234567890","login":"successful","type":"patient"})
+
+    }else{
+        res.json({"id":"000000","login":"fail"})
+
+    }
+})
+
+app.post("/api/docterslist",(req,res)=>{
+        res.json({"docter":[{"id":"D1","name":"David"},{"id":"G1","name":"Goutham"},{"id":"A1","name":"Akhil"},{"id":"K1","name":"Kiran"}]})
+
+})
+
+app.post("/api/patientlist",(req,res)=>{
+    res.json({"patient":[{"id":"p1","name":"starlyn"},{"id":"G1","name":"indu"},{"id":"A1","name":"yovan"},{"id":"K1","name":"satya"}]})
+
+})
+
 app.listen(5000,()=>{console.log("server started")})
