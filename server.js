@@ -101,13 +101,13 @@ app.post("/api/signin",(req,res)=>{
     var user=req.body.name
     var password=req.body.password
     if(user=="goutham"&& password=="goutham@123"){
-        res.json({"id":"1234567890","login":"successful","type":"pharmacy"})
+        res.json({"id":"ph1","login":"successful","type":"pharmacy"})
 
     }if(user=="david"&& password=="david@123"){
-        res.json({"id":"1234567890","login":"successful","type":"docter"})
+        res.json({"id":"d01","login":"successful","type":"docter"})
 
     }if(user=="starlyn"&& password=="staryln@123"){
-        res.json({"id":"1234567890","login":"successful","type":"patient"})
+        res.json({"id":"pa1","login":"successful","type":"patient"})
 
     }else{
         res.json({"id":"000000","login":"fail"})
@@ -116,17 +116,17 @@ app.post("/api/signin",(req,res)=>{
 })
 
 app.get("/api/doctershome",(req,res)=>{
-    res.json({"docter":[{"id":"D1","name":"David"}]})
+    res.json({"docter":[{"id":"do1","name":"David"}]})
 
 })
 
 app.get("/api/patienthome",(req,res)=>{
-    res.json({"docter":[{"id":"p1","name":"staryln"}]})
+    res.json({"docter":[{"id":"pa1","name":"staryln"}]})
 
 })
 
 app.get("/api/pharmacy",(req,res)=>{
-    res.json({"docter":[{"id":"p1","name":"goutham"}]})
+    res.json({"docter":[{"id":"ph1","name":"goutham"}]})
 
 })
 
