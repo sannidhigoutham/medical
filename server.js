@@ -1,6 +1,21 @@
 const express =require('express')
+const mongoose=require('mongoose')
+const dotenv=require('dotenv')
 const app =express()
 app.use(express.json()) 
+mongoose.connect("mongodb://localhost:27017/Medical")
+
+const usera = new mongoose.Schema({
+    user:{
+    type:String,
+    required:true
+    }
+})
+const dataa={user:"goutham"}
+const usermodal = mongoose.model("medicaldatas",usera)
+
+
+
 const data={"users":[{id:'1',name:'gou',score:'1',country:'India',images:"https://tse4.mm.bing.net/th?id=OIP.p1LJSrhzpdQyahNT_zCSuQHaE7&pid=Api&P=0&h=180"},
 {id:'2', name:'bha',score:'2',country:'India',images:"https://tse4.mm.bing.net/th?id=OIP.p1LJSrhzpdQyahNT_zCSuQHaE7&pid=Api&P=0&h=180"},
  {id:'3',name:'jay',score:'3',country:'India',images:"https://tse4.mm.bing.net/th?id=OIP.p1LJSrhzpdQyahNT_zCSuQHaE7&pid=Api&P=0&h=180"},
@@ -20,7 +35,14 @@ app.get('/api',(req,res)=>{
 app.post('/dataperson',(req,res)=>{
     const datavalue=require('./data')
 //    console.log("result",datavalue.datavalue())
-   res.json(datavalue.datavalue())
+var dataaaa=usermodal.find({}).then(function(users){
+    res.json(users)
+}).catch(function(error){
+    console.log(error)
+})
+console.log("000000000000000000000"+dataaaa)
+//    res.json(datavalue.datavalue())
+res.json({"true":"true"})
 
 })
 app.put('/data',(req,res)=>{
@@ -91,6 +113,21 @@ app.post("/api/signin",(req,res)=>{
         res.json({"id":"000000","login":"fail"})
 
     }
+})
+
+app.get("/api/doctershome",(req,res)=>{
+    res.json({"docter":[{"id":"D1","name":"David"}]})
+
+})
+
+app.get("/api/patienthome",(req,res)=>{
+    res.json({"docter":[{"id":"p1","name":"staryln"}]})
+
+})
+
+app.get("/api/pharmacy",(req,res)=>{
+    res.json({"docter":[{"id":"p1","name":"goutham"}]})
+
 })
 
 app.post("/api/docterslist",(req,res)=>{
