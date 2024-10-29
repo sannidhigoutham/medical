@@ -116,17 +116,20 @@ app.post("/api/signin",(req,res)=>{
 })
 
 app.get("/api/doctershome",(req,res)=>{
-    res.json({"docter":{"id":"do1","name":"David"}})
+    console.log("0000000000000000000",res.body);
+    res.json({"id":"do1","name":"David"})
 
 })
 
 app.get("/api/patienthome",(req,res)=>{
-    res.json({"docter":{"id":"pa1","name":"staryln"}})
+    console.log("0000000000000000000",res.body);
+    res.json({"id":"pa1","name":"staryln"})
 
 })
 
 app.get("/api/pharmacy",(req,res)=>{
-    res.json({"docter":{"id":"ph1","name":"goutham"}})
+    console.log("0000000000000000000",res.body);
+    res.json({"id":"ph1","name":"goutham"})
 
 })
 
