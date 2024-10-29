@@ -97,13 +97,13 @@ app.post("/api/signin",(req,res)=>{
     var user=req.body.name
     var password=req.body.password
     if(user=="goutham"&& password=="goutham@123"){
-        res.json({"id":"1234567890","login":"successful","type":"pharmacy"})
+        res.json({"id":"ph1","login":"successful","type":"pharmacy"})
 
     }if(user=="david"&& password=="david@123"){
-        res.json({"id":"1234567890","login":"successful","type":"docter"})
+        res.json({"id":"d01","login":"successful","type":"docter"})
 
     }if(user=="starlyn"&& password=="staryln@123"){
-        res.json({"id":"1234567890","login":"successful","type":"patient"})
+        res.json({"id":"pa1","login":"successful","type":"patient"})
 
     }else{
         res.json({"id":"000000","login":"fail"})
