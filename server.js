@@ -1,5 +1,7 @@
 const express = require("express");
-const dotenv = require("dotenv");
+const dotenv = require("dotenv"); // Importing dotenv but not using it, you can remove this line if not needed
+dotenv.config(); // If you intend to use dotenv for environment variables, call this function.
+
 const app = express();
 app.use(express.json());
 
@@ -43,31 +45,33 @@ const data = {
 app.get("/api", (req, res) => {
   console.log("req");
 
-  var list = [];
-  for (let i = 0; i < data.users.length; i++) {
-    console.log(data.users[i]);
-  }
+  data.users.forEach(user => {
+    console.log(user);
+  });
+
   res.json(data);
 });
 
 app.post("/dataperson", (req, res) => {
-  const datavalue = require("./data");
-  var dataaaa = usermodal
-    .find({})
-    .then(function (users) {
+  // Assuming usermodal is defined somewhere in your project.
+  // const usermodal = require("./usermodal"); // Uncomment and define this if you have a usermodal file.
+  const usermodal = {}; // Placeholder for usermodal; replace with actual implementation.
+  
+  usermodal.find({})
+    .then(users => {
       res.json(users);
     })
-    .catch(function (error) {
+    .catch(error => {
       console.log(error);
+      res.status(500).json({ error: "Internal Server Error" });
     });
-  console.log("000000000000000000000" + dataaaa);
-  res.json({ true: "true" });
 });
 
 app.put("/data", (req, res) => {
-  var user = req.body.value;
+  const user = req.body.value;
   console.log("00000000000000000", req.body.values, req.body, user);
-  var list = [];
+  const list = [];
+  
   if (user === "All") {
     list.push(data.users);
   } else {
@@ -78,89 +82,12 @@ app.put("/data", (req, res) => {
       }
     }
   }
-  res.json({
-    users: [
-      {
-        id: "1",
-        name: "gou",
-        value: "1",
-        score: "1",
-        country: "India",
-        images:
-          "https://tse4.mm.bing.net/th?id=OIP.p1LJSrhzpdQyahNT_zCSuQHaE7&pid=Api&P=0&h=180",
-      },
-      {
-        id: "2",
-        name: "bha",
-        value: "2",
-        score: "1",
-        country: "India",
-        images:
-          "https://tse4.mm.bing.net/th?id=OIP.p1LJSrhzpdQyahNT_zCSuQHaE7&pid=Api&P=0&h=180",
-      },
-      {
-        id: "3",
-        name: "jay",
-        value: "3",
-        score: "1",
-        country: "India",
-        images:
-          "https://tse4.mm.bing.net/th?id=OIP.p1LJSrhzpdQyahNT_zCSuQHaE7&pid=Api&P=0&h=180",
-      },
-      {
-        id: "4",
-        name: "sum",
-        value: "4",
-        score: "1",
-        country: "India",
-        images:
-          "https://tse4.mm.bing.net/th?id=OIP.p1LJSrhzpdQyahNT_zCSuQHaE7&pid=Api&P=0&h=180",
-      },
-    ],
-  });
+  
+  res.json(list);
 });
 
 app.get("/api/data", (req, res) => {
-  res.json({
-    users: [
-      {
-        id: "1",
-        name: "gou",
-        value: "1",
-        score: "1",
-        country: "India",
-        images:
-          "https://tse4.mm.bing.net/th?id=OIP.p1LJSrhzpdQyahNT_zCSuQHaE7&pid=Api&P=0&h=180",
-      },
-      {
-        id: "2",
-        name: "bha",
-        value: "2",
-        score: "1",
-        country: "India",
-        images:
-          "https://tse4.mm.bing.net/th?id=OIP.p1LJSrhzpdQyahNT_zCSuQHaE7&pid=Api&P=0&h=180",
-      },
-      {
-        id: "3",
-        name: "jay",
-        value: "3",
-        score: "1",
-        country: "India",
-        images:
-          "https://tse4.mm.bing.net/th?id=OIP.p1LJSrhzpdQyahNT_zCSuQHaE7&pid=Api&P=0&h=180",
-      },
-      {
-        id: "4",
-        name: "sum",
-        value: "4",
-        score: "1",
-        country: "India",
-        images:
-          "https://tse4.mm.bing.net/th?id=OIP.p1LJSrhzpdQyahNT_zCSuQHaE7&pid=Api&P=0&h=180",
-      },
-    ],
-  });
+  res.json(data);
 });
 
 app.get("/api/goutham", (req, res) => {
@@ -205,8 +132,8 @@ app.get("/api/images", (req, res) => {
 });
 
 app.post("/api/signin", (req, res) => {
-  var user = req.body.name;
-  var password = req.body.password;
+  const user = req.body.name;
+  const password = req.body.password;
   if (user === "goutham" && password === "goutham@123") {
     res.json({ id: "ph1", login: "successful", type: "pharmacy" });
   } else if (user === "david" && password === "david@123") {
@@ -233,7 +160,7 @@ app.get("/api/pharmacy", (req, res) => {
   res.json({ id: "ph1", name: "goutham" });
 });
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
