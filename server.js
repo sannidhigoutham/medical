@@ -1,18 +1,7 @@
 const express =require('express')
-const mongoose=require('mongoose')
 const dotenv=require('dotenv')
 const app =express()
 app.use(express.json()) 
-mongoose.connect("mongodb://localhost:27017/Medical")
-
-const usera = new mongoose.Schema({
-    user:{
-    type:String,
-    required:true
-    }
-})
-const dataa={user:"goutham"}
-const usermodal = mongoose.model("medicaldatas",usera)
 
 
 
