@@ -32,7 +32,7 @@ jobs:
       - name: Build Docker image
         run: |
           docker build -t medlink:${{ github.sha }} .
-      
+
       - name: Push Docker image to ECR
         env:
           AWS_REGION: us-east-2
@@ -45,7 +45,7 @@ jobs:
           aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
           
           # Tag and push the image
-          docker tag my-node-app:${{ github.sha }} $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:${{ github.sha }}
+          docker tag medlink:${{ github.sha }} $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:${{ github.sha }}
           docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:${{ github.sha }}
 
   deploy:
@@ -63,10 +63,12 @@ jobs:
 
       - name: Pull Docker image from ECR
         run: |
-          docker pull $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/medlink:${{ github.sha }}
+          IMAGE_URI="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/medlink:${{ github.sha }}"
+          echo "Pulling Docker image: $IMAGE_URI"
+          docker pull "$IMAGE_URI"
 
       - name: Deploy to Production
         run: |
           echo "Deploying to production..."
           # Example: run your container with the latest image
-          # docker run -d -p 8080:8080 $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/my-node-app:${{ github.sha }}
+          docker run -d -p 8080:8080 $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/medlink:${{ github.sha }}
