@@ -13,7 +13,7 @@
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^1.19.4",
-    "eslint": "^8.24.0" // Adjust this version as necessary
+    "eslint": "^8.24.0"
   },
   "dependencies": {
     "await": "^0.2.6",
