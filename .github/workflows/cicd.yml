@@ -32,7 +32,7 @@ jobs:
       - name: Build Docker image
         run: |
           docker build -t my-node-app:${{ github.sha }} .
-
+      
       - name: Push Docker image to ECR
         env:
           AWS_REGION: us-east-2
@@ -63,7 +63,6 @@ jobs:
 
       - name: Deploy to Production
         run: |
-          # Your deployment script here
           echo "Deploying to production..."
           # Example: run your container with the latest image
           # docker run -d -p 8080:8080 $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/my-node-app:${{ github.sha }}
