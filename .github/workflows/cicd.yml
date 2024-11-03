@@ -72,8 +72,8 @@ jobs:
           IMAGE_URI="345594589139.dkr.ecr.us-east-2.amazonaws.com/medlink:${{ github.sha }}"
           echo "Pulling Docker image: $IMAGE_URI"
           docker pull "$IMAGE_URI"
-      
-      - name: Deploy to Production
-        run: |
           echo "Deploying to production..."
           docker run -d -p 8080:8080 "$IMAGE_URI"
+      
+
+          
