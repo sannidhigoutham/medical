@@ -78,4 +78,4 @@ jobs:
           echo "Pulling Docker image: $IMAGE_URI"
           docker pull "$IMAGE_URI"
           echo "Deploying to production..."
-          docker run -d -p 8080:8080 "$IMAGE_URI"
+          docker run -d -p 3000:3000 "$IMAGE_URI"
