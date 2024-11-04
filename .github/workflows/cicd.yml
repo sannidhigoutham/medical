@@ -69,12 +69,12 @@ jobs:
       - name: Debug AWS Environment Variables
         run: |
           echo "AWS_ACCOUNT_ID: $AWS_ACCOUNT_ID"
-          echo "AWS_REGION: $AWS_REGION"
+          echo "AWS_REGION: {{ secrets.AWS_ACCOUNT_ID }}"
           echo "GITHUB_SHA: ${{ github.sha }}"
       
       - name: Pull Docker image from ECR
         run: |
-          IMAGE_URI="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/medlink:${{ github.sha }}"
+          IMAGE_URI="{{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/medlink:${{ github.sha }}"
           echo "Pulling Docker image: $IMAGE_URI"
           docker pull "$IMAGE_URI"
           echo "Deploying to production..."
