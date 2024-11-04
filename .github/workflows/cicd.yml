@@ -74,7 +74,7 @@ jobs:
       
       - name: Pull Docker image from ECR
         run: |
-          IMAGE_URI="{{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/medlink:${{ github.sha }}"
+          IMAGE_URI="345594589139.dkr.ecr.us-east-2.amazonaws.com/medlink:${{ github.sha }}"
           echo "Pulling Docker image: $IMAGE_URI"
           docker pull "$IMAGE_URI"
           echo "Deploying to production..."
