@@ -44,9 +44,14 @@ jobs:
           # Authenticate to ECR
           aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
           
-          # Tag and push the image
-          docker tag medlink:${{ github.sha }} $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:${{ github.sha }}:latest
+          # Tag and push the SHA image
+          docker tag medlink:${{ github.sha }} $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:${{ github.sha }}
           docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:${{ github.sha }}
+
+          # Tag and push the latest image
+          docker tag medlink:${{ github.sha }} $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:latest
+          echo "Pushing latest image..."
+          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -69,11 +74,8 @@ jobs:
       
       - name: Pull Docker image from ECR
         run: |
-          IMAGE_URI="345594589139.dkr.ecr.us-east-2.amazonaws.com/medlink:${{ github.sha }}"
+          IMAGE_URI="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/medlink:${{ github.sha }}"
           echo "Pulling Docker image: $IMAGE_URI"
           docker pull "$IMAGE_URI"
           echo "Deploying to production..."
           docker run -d -p 8080:8080 "$IMAGE_URI"
-      
-
-          
