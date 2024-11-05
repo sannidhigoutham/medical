@@ -86,8 +86,7 @@ jobs:
             docker pull 345594589139.dkr.ecr.us-east-2.amazonaws.com/medlink:latest
             
             # Stop and remove the old container if it exists
-            docker stop my_app || true
-            docker rm my_app || true
+          
             
             # Run the new container
             docker run -d --name my_app -p 3000:3000 345594589139.dkr.ecr.us-east-2.amazonaws.com/medlink:latest
