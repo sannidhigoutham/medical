@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const app = express();
+const controller = require('./controller/docterRepository')
 app.use(express.json());
 
 const data = {
@@ -125,7 +126,7 @@ app.get("/api/data", (req, res) => {
     users: [
       {
         id: "1",
-        name: "gou",
+        name: "goutham",
         value: "1",
         score: "1",
         country: "India",
@@ -134,7 +135,7 @@ app.get("/api/data", (req, res) => {
       },
       {
         id: "2",
-        name: "bha",
+        name: "bharath",
         value: "2",
         score: "1",
         country: "India",
@@ -143,7 +144,7 @@ app.get("/api/data", (req, res) => {
       },
       {
         id: "3",
-        name: "jay",
+        name: "jayram",
         value: "3",
         score: "1",
         country: "India",
@@ -152,7 +153,7 @@ app.get("/api/data", (req, res) => {
       },
       {
         id: "4",
-        name: "sum",
+        name: "sumanth",
         value: "4",
         score: "1",
         country: "India",
@@ -205,18 +206,28 @@ app.get("/api/images", (req, res) => {
 });
 
 app.post("/api/signin", (req, res) => {
-  var user = req.body.name;
-  var password = req.body.password;
-  if (user === "goutham" && password === "goutham@123") {
-    res.json({ id: "ph1", login: "successful", type: "pharmacy" });
-  } else if (user === "david" && password === "david@123") {
-    res.json({ id: "d01", login: "successful", type: "docter" });
-  } else if (user === "starlyn" && password === "staryln@123") {
-    res.json({ id: "pa1", login: "successful", type: "patient" });
-  } else {
-    res.json({ id: "000000", login: "fail" });
-  }
+  
+  controller.signin(req.body,(error,result)=>{
+    if(error){
+      res.json({status:500,error:error})
+
+    }else{
+      res.json(result)
+    }
+  })
+ 
 });
+app.post("/api/signup",(req,res) =>{
+console.log("000000000000000000000")
+  controller.signup(req.body,(error,result)=>{
+    if(error){
+      res.json({status:500,error:error})
+
+    }else{
+      res.json(result)
+    }
+  })
+})
 
 app.get("/api/doctershome", (req, res) => {
   console.log("0000000000000000000", req.body);
