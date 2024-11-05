@@ -3,13 +3,14 @@ const dotenv = require("dotenv"); // Importing dotenv but not using it, you can 
 dotenv.config(); // If you intend to use dotenv for environment variables, call this function.
 
 const app = express();
+const controller = require('./controller/docterRepository')
 app.use(express.json());
 
 const data = {
   users: [
     {
       id: "1",
-      name: "gou",
+      name: "goutham",
       score: "1",
       country: "India",
       images:
@@ -17,7 +18,7 @@ const data = {
     },
     {
       id: "2",
-      name: "bha",
+      name: "bharath",
       score: "2",
       country: "India",
       images:
@@ -25,7 +26,7 @@ const data = {
     },
     {
       id: "3",
-      name: "jay",
+      name: "jayram",
       score: "3",
       country: "India",
       images:
@@ -33,7 +34,7 @@ const data = {
     },
     {
       id: "4",
-      name: "sum",
+      name: "sumanth",
       score: "4",
       country: "India",
       images:
@@ -144,6 +145,17 @@ app.post("/api/signin", (req, res) => {
     res.json({ id: "000000", login: "fail" });
   }
 });
+app.post("/api/signup",(req,res) =>{
+console.log("000000000000000000000")
+  controller.signup(req.body,(error,result)=>{
+    if(error){
+      res.json({status:500,error:error})
+
+    }else{
+      res.json(result)
+    }
+  })
+})
 
 app.get("/api/doctershome", (req, res) => {
   console.log("0000000000000000000", req.body);
