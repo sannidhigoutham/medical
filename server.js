@@ -10,7 +10,7 @@ const data = {
   users: [
     {
       id: "1",
-      name: "goutham",
+      name: "goutham akhil",
       score: "1",
       country: "India",
       images:
