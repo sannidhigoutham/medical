@@ -3,7 +3,7 @@ const dotenv = require("dotenv"); // Importing dotenv but not using it, you can 
 dotenv.config(); // If you intend to use dotenv for environment variables, call this function.
 
 const app = express();
-const controller = require('./controller/docterRepository')
+const controller = require("./controller/docterRepository");
 app.use(express.json());
 
 const data = {
@@ -146,16 +146,15 @@ app.post("/api/signin", (req, res) => {
   }
 });
 app.post("/api/signup",(req,res) =>{
-console.log("000000000000000000000")
   controller.signup(req.body,(error,result)=>{
     if(error){
-      res.json({status:500,error:error})
+      res.json({status:500,error:error});
 
     }else{
-      res.json(result)
+      res.json(result);
     }
-  })
-})
+  });
+});
 
 app.get("/api/doctershome", (req, res) => {
   console.log("0000000000000000000", req.body);
