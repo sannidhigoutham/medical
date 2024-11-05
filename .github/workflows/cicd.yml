@@ -77,6 +77,10 @@ jobs:
             
             # Authenticate to ECR on the EC2 instance
             aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+            if [ \$(docker ps -q -f name=my_app) ]; then
+              docker stop my_app
+              docker rm my_app
+            fi
             
             # Pull the latest image
             docker pull 345594589139.dkr.ecr.us-east-2.amazonaws.com/medlink:latest
