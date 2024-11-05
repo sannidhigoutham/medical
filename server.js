@@ -10,7 +10,7 @@ const data = {
   users: [
     {
       id: "1",
-      name: "gou",
+      name: "goutham",
       score: "1",
       country: "India",
       images:
@@ -18,7 +18,7 @@ const data = {
     },
     {
       id: "2",
-      name: "bha",
+      name: "bharath",
       score: "2",
       country: "India",
       images:
@@ -26,7 +26,7 @@ const data = {
     },
     {
       id: "3",
-      name: "jay",
+      name: "jayram",
       score: "3",
       country: "India",
       images:
@@ -34,7 +34,7 @@ const data = {
     },
     {
       id: "4",
-      name: "sum",
+      name: "sumanth",
       score: "4",
       country: "India",
       images:
