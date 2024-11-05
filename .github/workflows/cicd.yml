@@ -77,19 +77,16 @@ jobs:
         run: |
           # Define the Elastic IP of your EC2 instance
           EC2_INSTANCE_IP="3.130.128.18"
-
           # SSH into the EC2 instance and pull the latest image
           ssh -o StrictHostKeyChecking=no ec2-user@$EC2_INSTANCE_IP << 'EOF'
+            set -e
             # Authenticate to ECR on the EC2 instance
-            $(aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com)
-
+            aws ecr get-login-password --region '$AWS_REGION' | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
             # Pull the latest image
             docker pull $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:latest
-
             # Stop and remove the old container if it exists
             docker stop my_app || true
             docker rm my_app || true
-
             # Run the new container
             docker run -d --name my_app -p 3000:3000 $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:latest
           EOF
