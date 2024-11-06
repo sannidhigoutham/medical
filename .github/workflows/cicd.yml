@@ -32,7 +32,6 @@ jobs:
       - name: Build Docker image
         run: |
           docker build -t medlink:${{ github.sha }} -t medlink:latest .
-
       - name: Push Docker image to ECR
         env:
           AWS_REGION: us-east-2
@@ -50,20 +49,14 @@ jobs:
           
           docker tag medlink:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:latest
           docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:latest
-
   deploy:
     runs-on: ubuntu-latest
     needs: build
     steps:
       - name: Set up SSH key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.YOUR_SSH_KEY_SECRET}}" | base64 --decode > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          # Optional: Disable strict host checking (to avoid host verification)
-          echo "Host *" >> ~/.ssh/config
-          echo "  StrictHostKeyChecking no" >> ~/.ssh/config
-          echo "  UserKnownHostsFile /dev/null" >> ~/.ssh/config
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.YOUR_SSH_KEY_SECRET }}
 
       - name: Deploy to EC2 Instance
         env:
@@ -72,7 +65,7 @@ jobs:
           ECR_REPOSITORY: medlink
         run: |
           # Define the Elastic IP of your EC2 instance
-          EC2_INSTANCE_IP="3.146.219.128"
+          EC2_INSTANCE_IP="3.130.128.18"
           # SSH into the EC2 instance and pull the latest image
           ssh -o StrictHostKeyChecking=no ec2-user@$EC2_INSTANCE_IP << EOF
             set -e
