@@ -58,7 +58,7 @@ jobs:
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "$EC2_SSH_KEY" | base64 --decode > ~/.ssh/id_rsa
+          echo "${{ secrets.YOUR_SSH_KEY_SECRET}}" | base64 --decode > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           # Optional: Disable strict host checking (to avoid host verification)
           echo "Host *" >> ~/.ssh/config
