@@ -1,21 +1,11 @@
-const signup = (data, callback)=>{
+const db= require("../db")
 
-    console.log("000000")
+const signup = (data, callback)=>{
+  db.query('SELECT * FROM user where name= ?', data, callback);
 }
 
 const signin = (data, callback)=>{
-    var user = data.name;
-    var password = data.password;
-    return true
-  if (user === "goutham" && password === "goutham@123") {
-    ({ id: "ph1", login: "successful", type: "pharmacy" });
-  } else if (user === "david" && password === "david@123") {
-    ({ id: "d01", login: "successful", type: "docter" });
-  } else if (user === "starlyn" && password === "staryln@123") {
-    ({ id: "pa1", login: "successful", type: "patient" });
-  } else {
-    ({ id: "000000", login: "fail" });
-  }
+  db.query('SELECT * FROM user where name ? and password ?', [data.name,data.password], callback);
 }
 
 module.exports ={

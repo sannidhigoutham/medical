@@ -12,8 +12,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^1.19.4",
-    "eslint": "^8.57.1"
+    "eslint": "^8.57.1",
+    "nodemon": "^1.19.4"
   },
   "dependencies": {
     "await": "^0.2.6",
@@ -21,7 +21,8 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "mongodb": "^6.10.0",
-    "mongoose": "^8.7.3"
+    "mongoose": "^8.7.3",
+    "mysql": "^2.18.1"
   },
   "description": ""
 }

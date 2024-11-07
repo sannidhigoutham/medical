@@ -132,18 +132,15 @@ app.get("/api/images", (req, res) => {
   });
 });
 
-app.post("/api/signin", (req, res) => {
-  const user = req.body.name;
-  const password = req.body.password;
-  if (user === "goutham" && password === "goutham@123") {
-    res.json({ id: "ph1", login: "successful", type: "pharmacy" });
-  } else if (user === "david" && password === "david@123") {
-    res.json({ id: "d01", login: "successful", type: "docter" });
-  } else if (user === "starlyn" && password === "staryln@123") {
-    res.json({ id: "pa1", login: "successful", type: "patient" });
-  } else {
-    res.json({ id: "000000", login: "fail" });
-  }
+app.get("/api/signin", (req, res) => {
+  controller.signin(req.body,(error,result)=>{
+    if(error){
+      res.json({status:500,error:error});
+
+    }else{
+      res.json(result);
+    }
+  });
 });
 app.post("/api/signup",(req,res) =>{
   controller.signup(req.body,(error,result)=>{
