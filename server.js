@@ -154,18 +154,36 @@ app.post("/api/signup",(req,res) =>{
 });
 
 app.get("/api/doctershome", (req, res) => {
-  console.log("0000000000000000000", req.body);
-  res.json({ id: "do1", name: "David" });
+  controller.homedocter(req.body,(error,result)=>{
+    if(error){
+      res.json({status:500,error:error});
+
+    }else{
+      res.json(result);
+    }
+  });
 });
 
 app.get("/api/patienthome", (req, res) => {
-  console.log("0000000000000000000", req.body);
-  res.json({ id: "pa1", name: "staryln" });
+  controller.homepatient(req.body,(error,result)=>{
+    if(error){
+      res.json({status:500,error:error});
+
+    }else{
+      res.json(result);
+    }
+  });
 });
 
 app.get("/api/pharmacy", (req, res) => {
-  console.log("0000000000000000000", req.body);
-  res.json({ id: "ph1", name: "goutham" });
+  controller.homepharmacy(req.body,(error,result)=>{
+    if(error){
+      res.json({status:500,error:error});
+
+    }else{
+      res.json(result);
+    }
+  });
 });
 
 const port = process.env.PORT || 3000;

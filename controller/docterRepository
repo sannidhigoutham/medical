@@ -16,7 +16,22 @@ const signin = (data, callback)=>{
   db.query('select * from userlogin email = ? and password = ?', [data.email,data.password], callback);
 }
 
+const homedocter = (data, callback)=>{
+  db.query('select * from userlogin id = ? ', data.id, callback);
+}
+
+const homepatient = (data, callback)=>{
+  db.query('select * from userlogin id = ? ', data.id, callback);
+}
+
+const homepharmacy = (data, callback)=>{
+  db.query('select * from userlogin id = ? ', data.id, callback);
+}
+
 module.exports ={
     signup,
-    signin
+    signin,
+    homedocter,
+    homepatient,
+    homepharmacy
 }
