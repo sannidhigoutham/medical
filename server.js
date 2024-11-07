@@ -186,6 +186,19 @@ app.get("/api/pharmacy", (req, res) => {
   });
 });
 
+app.get("/api/searchpatient", (req, res) => {
+  controller.searchpatient(req.body,(error,result)=>{
+    if(error){
+      res.json({status:500,error:error});
+
+    }else{
+      res.json(result);
+    }
+  });
+});
+
+
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {

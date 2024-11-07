@@ -17,21 +17,25 @@ const signin = (data, callback)=>{
 }
 
 const homedocter = (data, callback)=>{
-  db.query('select * from userlogin id = ? ', data.id, callback);
+  db.query('select * from docteruser id = ? ', data.id, callback);
 }
 
 const homepatient = (data, callback)=>{
-  db.query('select * from userlogin id = ? ', data.id, callback);
+  db.query('select * from patientuser id = ? ', data.id, callback);
 }
 
 const homepharmacy = (data, callback)=>{
-  db.query('select * from userlogin id = ? ', data.id, callback);
+  db.query('select * from pharmacy id = ? ', data.id, callback);
 }
 
+const searchpatient = (data, callback)=>{
+  db.query('select * from patientuser id = ? ', data.id, callback);
+}
 module.exports ={
     signup,
     signin,
     homedocter,
     homepatient,
-    homepharmacy
+    homepharmacy,
+    searchpatient
 }
