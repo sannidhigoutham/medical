@@ -1,18 +1,19 @@
 const db= require("../db")
 
 const signup = (data, callback)=>{
+  db.query('insert into userdata set ?', data, callback);
+
   if(data.type=="patient"){
-    db.query('SELECT * FROM patientuser where name ? and password ?', [data.name,data.password], callback);
+    db.query('insert into user', data, callback);
     }else if(data.type=="docter"){
-      db.query('SELECT * FROM docteruser where name ? and password ?', [data.name,data.password], callback);
+      db.query('SELECT * FROM docteruser where name= ? and password= ?', [data.name,data.password], callback);
       }else if(data.type=="pharmacy"){
-        db.query('SELECT * FROM pharmacy where name ? and password ?', [data.name,data.password], callback);
+        db.query('SELECT * FROM pharmacy where name= ? and password= ?', [data.name,data.password], callback);
         }
 }
 
 const signin = (data, callback)=>{
-  db.query('SELECT * FROM user where name= ?', data, callback);
-  
+  db.query('select * from userlogin email = ? and password = ?', [data.email,data.password], callback);
 }
 
 module.exports ={
