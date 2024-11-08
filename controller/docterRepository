@@ -15,8 +15,6 @@ const signup = (data, callback)=>{
       }else if(data.type=="docter"){
         data.id=result.insertId
         delete data.type
-      console.log("000000000000000000000",result)
-
         db.query('insert into docteruser set ?', data, callback);
       }else if(data.type=="pharmacy"){
         db.query('insert into pharmacy set ?', data, callback);
