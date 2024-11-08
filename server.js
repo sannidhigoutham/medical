@@ -135,7 +135,7 @@ app.get("/api/images", (req, res) => {
 app.get("/api/signin", (req, res) => {
   controller.signin(req.body,(error,result)=>{
     if(error){
-      res.json({status:500,error:error});
+      res.json({status:"unsuccessfull",message:error});
 
     }else{
       res.json(result);
@@ -145,7 +145,7 @@ app.get("/api/signin", (req, res) => {
 app.post("/api/signup",(req,res) =>{
   controller.signup(req.body,(error,result)=>{
     if(error){
-      res.json({status:"unsuccessfull",error:error});
+      res.json({status:"unsuccessfull",message:error});
 
     }else{
       res.json({status:"successfull"});
