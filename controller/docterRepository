@@ -8,7 +8,6 @@ const signup = (data, callback)=>{
   db.query('insert into userlogin set ?', logindata, (error, result)=>{
     if(error){
       return(callback,null)
-
     }else{
       if(data.type=="patient"){
         db.query('insert into patientuser set ?', data, callback);
@@ -23,18 +22,15 @@ const signup = (data, callback)=>{
   });
 }
 
-
 const userdata = (data, callback)=>{
   if(data.type=="patient"){
-    db.query('insert into patientuser', data, callback);
-    }else if(data.type=="docter"){
-    db.query('insert into docteruser', data, callback);
-      }else if(data.type=="pharmacy"){
-    db.query('insert into pharmacy', data, callback);
-        }
+  db.query('insert into patientuser', data, callback);
+  }else if(data.type=="docter"){
+  db.query('insert into docteruser', data, callback);
+  }else if(data.type=="pharmacy"){
+  db.query('insert into pharmacy', data, callback);
+  }
 }
-
-
 
 const signin = (data, callback)=>{
   db.query('select * from userlogin where email = ? and password = ?', [data.email,data.password], callback);
