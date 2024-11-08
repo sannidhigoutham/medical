@@ -1,16 +1,42 @@
 const db= require("../db")
 
 const signup = (data, callback)=>{
-  db.query('insert into userdata set ?', data, callback);
+  var logindata={}
+  logindata.email=data.email
+  logindata.password=data.password
+  logindata.type=data.type
+  db.query('insert into userlogin set ?', logindata, (error, result)=>{
+    if(error){
+      return(callback,null)
 
-  if(data.type=="patient"){
-    db.query('insert into user', data, callback);
-    }else if(data.type=="docter"){
-      db.query('SELECT * FROM docteruser where name= ? and password= ?', [data.name,data.password], callback);
+    }else{
+      if(data.type=="patient"){
+        db.query('insert into patientuser set ?', data, callback);
+      }else if(data.type=="docter"){
+        data.id=result.insertId
+        delete data.type
+      console.log("000000000000000000000",result)
+
+        db.query('insert into docteruser set ?', data, callback);
       }else if(data.type=="pharmacy"){
-        db.query('SELECT * FROM pharmacy where name= ? and password= ?', [data.name,data.password], callback);
+        db.query('insert into pharmacy set ?', data, callback);
+      }
+    }
+  });
+}
+
+
+const userdata = (data, callback)=>{
+  if(data.type=="patient"){
+    db.query('insert into patientuser', data, callback);
+    }else if(data.type=="docter"){
+    db.query('insert into docteruser', data, callback);
+      }else if(data.type=="pharmacy"){
+    db.query('insert into pharmacy', data, callback);
         }
 }
+
+
 
 const signin = (data, callback)=>{
   db.query('select * from userlogin email = ? and password = ?', [data.email,data.password], callback);
