@@ -22,14 +22,8 @@ const signup = (data, callback)=>{
   });
 }
 
-const userdata = (data, callback)=>{
-  if(data.type=="patient"){
-  db.query('insert into patientuser', data, callback);
-  }else if(data.type=="docter"){
-  db.query('insert into docteruser', data, callback);
-  }else if(data.type=="pharmacy"){
-  db.query('insert into pharmacy', data, callback);
-  }
+const medicinesdata = (data, callback)=>{
+  db.query('insert into medicaldata set ?', data, callback);
 }
 
 const signin = (data, callback)=>{
@@ -37,19 +31,19 @@ const signin = (data, callback)=>{
 }
 
 const homedocter = (data, callback)=>{
-  db.query('select * from docteruser id = ? ', data.id, callback);
+  db.query('select * from docteruser where id = ? ', data.id, callback);
 }
 
 const homepatient = (data, callback)=>{
-  db.query('select * from patientuser id = ? ', data.id, callback);
+  db.query('select * from patientuser where id = ? ', data.id, callback);
 }
 
 const homepharmacy = (data, callback)=>{
-  db.query('select * from pharmacy id = ? ', data.id, callback);
+  db.query('select * from pharmacy where id = ? ', data.id, callback);
 }
 
 const searchpatient = (data, callback)=>{
-  db.query('select * from patientuser id = ? ', data.id, callback);
+  db.query('select * from patientuser where id = ? ', data.id, callback);
 }
 module.exports ={
     signup,
@@ -57,5 +51,6 @@ module.exports ={
     homedocter,
     homepatient,
     homepharmacy,
-    searchpatient
+    searchpatient,
+    medicinesdata
 }
