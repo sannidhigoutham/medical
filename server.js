@@ -145,10 +145,10 @@ app.get("/api/signin", (req, res) => {
 app.post("/api/signup",(req,res) =>{
   controller.signup(req.body,(error,result)=>{
     if(error){
-      res.json({status:500,error:error});
+      res.json({status:"unsuccessfull",error:error});
 
     }else{
-      res.json(result);
+      res.json({status:"successfull"});
     }
   });
 });
