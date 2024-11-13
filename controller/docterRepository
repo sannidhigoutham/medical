@@ -22,7 +22,7 @@ const signup = (data, callback)=>{
   });
 }
 
-const medicinesdata = (data, callback)=>{
+const addMedication = (data, callback)=>{
   db.query('insert into medicaldata set ?', data, callback);
 }
 
@@ -45,6 +45,10 @@ const homepharmacy = (data, callback)=>{
 const searchpatient = (data, callback)=>{
   db.query('select * from patientuser where id = ? ', data.id, callback);
 }
+
+const searchdocter = (data, callback)=>{
+  db.query('select * from patientuser where id = ? ', data.id, callback);
+}
 module.exports ={
     signup,
     signin,
@@ -52,5 +56,6 @@ module.exports ={
     homepatient,
     homepharmacy,
     searchpatient,
-    medicinesdata
+    addMedication,
+    searchdocter
 }
