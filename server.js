@@ -22,7 +22,7 @@ app.post("/api/signup",(req,res) =>{
       res.json({status:"unsuccessfull",message:error});
 
     }else{
-      res.json({status:"successfull"});
+      res.json(result);
     }
   });
 });

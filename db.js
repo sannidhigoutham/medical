@@ -6,12 +6,12 @@ const db = mysql.createConnection({
     password:"askfeteworld",
     database:"Medical",
     port:3308,
-})
+});
 
 db.connect((err)=>{
     if(err){
         throw err
     }
-})
+});
 
 module.exports =db
