@@ -1,24 +1,61 @@
-const signup = (data, callback)=>{
+const db= require("../db")
 
-    console.log("000000")
+const signup = (data, callback)=>{
+  var logindata={}
+  logindata.email=data.email
+  logindata.password=data.password
+  logindata.type=data.type
+  db.query('insert into userlogin set ?', logindata, (error, result)=>{
+    if(error){
+      return(callback,null)
+    }else{
+      if(data.type=="patient"){
+        db.query('insert into patientuser set ?', data, callback);
+      }else if(data.type=="docter"){
+        data.id=result.insertId
+        delete data.type
+        db.query('insert into docteruser set ?', data, callback);
+      }else if(data.type=="pharmacy"){
+        db.query('insert into pharmacy set ?', data, callback);
+      }
+    }
+  });
+}
+
+const addMedication = (data, callback)=>{
+  db.query('insert into medicaldata set ?', data, callback);
 }
 
 const signin = (data, callback)=>{
-    var user = data.name;
-    var password = data.password;
-    return true
-  if (user === "goutham" && password === "goutham@123") {
-    ({ id: "ph1", login: "successful", type: "pharmacy" });
-  } else if (user === "david" && password === "david@123") {
-    ({ id: "d01", login: "successful", type: "docter" });
-  } else if (user === "starlyn" && password === "staryln@123") {
-    ({ id: "pa1", login: "successful", type: "patient" });
-  } else {
-    ({ id: "000000", login: "fail" });
-  }
+  db.query('select * from userlogin where email = ? and password = ?', [data.email,data.password], callback);
 }
 
+const homedocter = (data, callback)=>{
+  db.query('select * from docteruser where id = ? ', data.id, callback);
+}
+
+const homepatient = (data, callback)=>{
+  db.query('select * from patientuser where id = ? ', data.id, callback);
+}
+
+const homepharmacy = (data, callback)=>{
+  db.query('select * from pharmacy where id = ? ', data.id, callback);
+}
+
+const searchpatient = (data, callback)=>{
+  db.query('select * from patientuser where id = ? ', data.id, callback);
+}
+
+const searchdocter = (data, callback)=>{
+  db.query('select * from patientuser where id = ? ', data.id, callback);
+}
 module.exports ={
     signup,
-    signin
+    signin,
+    homedocter,
+    homepatient,
+    homepharmacy,
+    searchpatient,
+    addMedication,
+    searchdocter
 }
