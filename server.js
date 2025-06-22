@@ -6,7 +6,7 @@ const app = express();
 const controller = require("./controller/docterRepository");
 app.use(express.json());
 
-app.get("/api/signin", (req, res) => {
+app.post("/api/signin", (req, res) => {
   controller.signin(req.body,(error,result)=>{
     if(error){
       res.json({status:"unsuccessfull",message:error});
